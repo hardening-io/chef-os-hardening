@@ -233,3 +233,19 @@ default['os-hardening']['security']['suid_sgid']['system_whitelist']          = 
 
 # set default cpu vendor
 default['os-hardening']['security']['cpu_vendor'] = 'intel'
+
+# auditd config
+default['os-hardening']['auditd']['flush'] = 'INCREMENTAL'
+default['os-hardening']['auditd']['log_group'] = 'root'
+default['os-hardening']['auditd']['priority_boost'] = '4'
+default['os-hardening']['auditd']['freq'] = '20'
+default['os-hardening']['auditd']['num_logs'] = '5'
+default['os-hardening']['auditd']['disp_qos'] = 'lossy'
+default['os-hardening']['auditd']['dispatcher'] = '/sbin/audispd'
+default['os-hardening']['auditd']['name_format'] = 'NONE'
+default['os-hardening']['auditd']['max_log_file'] = '6'
+default['os-hardening']['auditd']['tcp_listen_queue'] = '5'
+default['os-hardening']['auditd']['tcp_max_per_addr'] = '1'
+default['os-hardening']['auditd']['tcp_client_max_idle'] = '0'
+default['os-hardening']['auditd']['enable_krb5'] = 'no'
+default['os-hardening']['auditd']['krb5_principal'] = 'auditd'

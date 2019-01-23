@@ -1,0 +1,33 @@
+<% node['config_disclaimer'].to_s.split("\n").each do |l| %>
+# <%= l %>
+<% end %>
+#
+#--
+
+# Specified by linux-baseline
+log_file = /var/log/audit/audit.log
+log_format = RAW
+flush = <%= @flush %>
+max_log_file_action = keep_logs 
+space_left = 75
+action_mail_acct = root
+space_left_action = SYSLOG
+admin_space_left = 50
+admin_space_left_action = SUSPEND
+disk_full_action = SUSPEND
+disk_error_action = SUSPEND
+
+# Unspecified, auditd defaults unless overwritten
+log_group = <%= @log_group %> 
+priority_boost = <%= @priority_boost %>
+freq = <%= @freq %>
+num_logs = <%= @num_logs %>
+disp_qos = <%= @disp_qos %>
+dispatcher = <%= @dispatcher %>
+name_format = <%= @name_format %>
+max_log_file = <%= @max_log_file %>
+tcp_listen_queue = <%= @tcp_listen_queue %>
+tcp_max_per_addr = <%= @tcp_max_per_addr %>
+tcp_client_max_idle = <%= @tcp_client_max_idle %>
+enable_krb5 = <%= @enable_krb5 %>
+krb5_principal = <%= @krb5_principal %>
