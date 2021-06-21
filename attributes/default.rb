@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 #
-# Cookbook Name:: os-hardening
+# Cookbook:: os-hardening
 # Attributes:: default
 #
-# Copyright 2012, Dominik Richter
-# Copyright 2014, Deutsche Telekom AG
+# Copyright:: 2012, Dominik Richter
+# Copyright:: 2014, Deutsche Telekom AG
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@
 
 default['os-hardening'].tap do |os_hardening|
   # components of this cookbook
-  %w[packages limits login_defs minimize_access pam profile securetty].each do |cp|
+  %w(packages limits login_defs minimize_access pam profile securetty).each do |cp|
     os_hardening['components'][cp] = true
   end
 
@@ -76,7 +76,7 @@ default['os-hardening'].tap do |os_hardening|
     auth['timeout'] = 60
     auth['allow_homeless'] = false
     auth['login_defs']['template_cookbook'] = 'os-hardening'
-    auth['root_ttys'] = %w[console tty1 tty2 tty3 tty4 tty5 tty6]
+    auth['root_ttys'] = %w(console tty1 tty2 tty3 tty4 tty5 tty6)
     auth['uid_min'] = 1000
     auth['uid_max'] = 60000
     auth['gid_min'] = 1000
@@ -86,8 +86,7 @@ default['os-hardening'].tap do |os_hardening|
 
     # PAM settings
     auth['pam'].tap do |pam|
-      case node['platform_family']
-      when 'rhel', 'fedora', 'amazon'
+      if platform_family?('rhel', 'fedora', 'amazon')
         if node['platform_version'].to_f < 7
           pam['passwdqc']['enable'] = true
           pam['pwquality']['enable'] = false
@@ -109,8 +108,7 @@ default['os-hardening'].tap do |os_hardening|
   end
 
   # RH has a bit different defaults on some places
-  case node['platform_family']
-  when 'rhel', 'amazon'
+  if platform_family?('rhel', 'amazon')
     os_hardening['env']['umask'] = '077'
     os_hardening['auth']['sys_uid_min'] = 201
     os_hardening['auth']['sys_gid_min'] = 201
@@ -124,7 +122,7 @@ default['os-hardening'].tap do |os_hardening|
     # may contain: change_user
     security['users']['allow'] = []
     security['kernel']['enable_module_loading'] = true
-    security['kernel']['disable_filesystems'] = %w[cramfs freevxfs jffs2 hfs hfsplus squashfs udf vfat]
+    security['kernel']['disable_filesystems'] = %w(cramfs freevxfs jffs2 hfs hfsplus squashfs udf vfat)
     security['kernel']['enable_sysrq'] = false
     security['kernel']['enable_core_dump'] = false
     security['suid_sgid']['enforce'] = true
@@ -145,13 +143,13 @@ default['os-hardening'].tap do |os_hardening|
     # remove packages with known issues
     security['packages']['clean'] = true
     # list of packages with known issues
-    security['packages']['list'] = [
-      'xinetd',
-      'inetd',
-      'ypserv',
-      'telnet-server',
-      'rsh-server'
-    ]
+    security['packages']['list'] = %w(
+      xinetd
+      inetd
+      ypserv
+      telnet-server
+      rsh-server
+    )
 
     # SELinux enforcing (enforcing, permissive, unmanaged)
     security['selinux_mode'] = 'unmanaged'

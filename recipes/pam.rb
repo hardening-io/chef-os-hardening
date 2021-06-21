@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 #
-# Cookbook Name: os-hardening
+# Cookbook:: Name: os-hardening
 # Recipe: pam.rb
 #
-# Copyright 2012, Dominik Richter
-# Copyright 2014, Deutsche Telekom AG
+# Copyright:: 2012, Dominik Richter
+# Copyright:: 2014, Deutsche Telekom AG
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

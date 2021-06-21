@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 #
-# Cookbook Name:: os-hardening
+# Cookbook:: os-hardening
 # Library:: suid_sgid
 #
-# Copyright 2012, Dominik Richter
-# Copyright 2014, Deutsche Telekom AG
+# Copyright:: 2012, Dominik Richter
+# Copyright:: 2014, Deutsche Telekom AG
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -46,9 +46,9 @@ class Chef
       end
 
       def self.remove_suid_sgid_from_blacklist(blacklist)
-        blacklist.
-          select { |file| File.exist?(file) }.
-          each do |file|
+        blacklist
+          .select { |file| File.exist?(file) }
+          .each do |file|
             Chef::Log.info "suid_sgid: Blacklist SUID/SGID for '#{file}', removing bit..."
             remove_suid_sgid_from(file)
           end

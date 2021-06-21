@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 #
-# Cookbook Name: os-hardening
+# Cookbook:: Name: os-hardening
 # Recipe: packages.rb
 #
-# Copyright 2014, Deutsche Telekom AG
+# Copyright:: 2014, Deutsche Telekom AG
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,13 +20,7 @@
 #
 
 # do package config for ubuntu
-case node['platform_family']
-when 'debian'
-  include_recipe('os-hardening::apt')
-end
+include_recipe 'os-hardening::apt' if platform_family?('debian')
 
 # do package config for rhel-family
-case node['platform_family']
-when 'rhel', 'fedora', 'amazon'
-  include_recipe('os-hardening::yum')
-end
+include_recipe 'os-hardening::yum' if platform_family?('rhel', 'fedora', 'amazon')

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 #
-# Cookbook Name: os-hardening
+# Cookbook:: Name: os-hardening
 # Recipe: pack_yum.rb
 #
-# Copyright 2014, Deutsche Telekom AG
+# Copyright:: 2014, Deutsche Telekom AG
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ end
 if node['os-hardening']['security']['packages']['clean']
 
   # remove unused repos
-  %w[CentOS-Debuginfo CentOS-Media CentOS-Vault].each do |repo|
+  %w(CentOS-Debuginfo CentOS-Media CentOS-Vault).each do |repo|
     yum_repository repo do
       action :remove
     end

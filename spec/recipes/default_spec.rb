@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 #
-# Copyright 2014, Deutsche Telekom AG
+# Copyright:: 2014, Deutsche Telekom AG
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,9 +27,9 @@ describe 'os-hardening::default' do
       node.normal['cpu']['0']['vendor_id'] = 'GenuineIntel'
       node.normal['env']['extra_user_paths'] = []
 
-      paths = %w[
+      paths = %w(
         /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin
-      ] + node['env']['extra_user_paths']
+      ) + node['env']['extra_user_paths']
       paths.each do |folder|
         stub_command(
           "find #{folder}  -perm -go+w -type f | wc -l | egrep '^0$'"

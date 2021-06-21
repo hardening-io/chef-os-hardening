@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 #
-# Cookbook Name: os-hardening
+# Cookbook:: Name: os-hardening
 # Recipe: default
 #
-# Copyright 2012, Dominik Richter
-# Copyright 2014, Deutsche Telekom AG
+# Copyright:: 2012, Dominik Richter
+# Copyright:: 2014, Deutsche Telekom AG
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ unless node['virtualization']['system'] =~ /^(lxc|docker)$/ && node['virtualizat
 
   # selinux should be included only on RH based systems
   node.default['os-hardening']['components']['selinux'] =
-    node['platform_family'] == 'rhel' || node['platform_family'] == 'fedora'
+    platform_family?('rhel', 'fedora')
 end
 
 # include all required components

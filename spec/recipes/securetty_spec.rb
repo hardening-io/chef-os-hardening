@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 #
-# Copyright 2014, Deutsche Telekom AG
+# Copyright:: 2014, Deutsche Telekom AG
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ describe 'os-hardening::securetty' do
       group:     'root',
       mode:      '0400',
       variables: {
-        ttys: "console\ntty1\ntty2\ntty3\ntty4\ntty5\ntty6"
+        ttys: "console\ntty1\ntty2\ntty3\ntty4\ntty5\ntty6",
       }
     )
   end

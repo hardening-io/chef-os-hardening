@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 #
-# Copyright 2014, Deutsche Telekom AG
+# Copyright:: 2014, Deutsche Telekom AG
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -52,17 +52,17 @@ describe 'os-hardening::login_defs' do
         sys_uid_max:              999,
         sys_gid_min:              100,
         sys_gid_max:              999,
-        mail_dir:                 '/var/mail'
+        mail_dir:                 '/var/mail',
       }
     )
   end
 
   it 'uses uid_min and gid_min in /etc/login.defs' do
-    is_expected.to render_file('/etc/login.defs').
-      with_content(/^PASS_WARN_AGE\s+7$/).
-      with_content(/^UID_MIN\s+5000$/).
-      with_content(/^UID_MAX\s+6000$/).
-      with_content(/^GID_MIN\s+5000$/).
-      with_content(/^GID_MAX\s+6000$/)
+    is_expected.to render_file('/etc/login.defs')
+      .with_content(/^PASS_WARN_AGE\s+7$/)
+      .with_content(/^UID_MIN\s+5000$/)
+      .with_content(/^UID_MAX\s+6000$/)
+      .with_content(/^GID_MIN\s+5000$/)
+      .with_content(/^GID_MAX\s+6000$/)
   end
 end

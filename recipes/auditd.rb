@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 #
-# Cookbook Name: os-hardening
+# Cookbook:: Name: os-hardening
 # Recipe: auditd.rb
 #
-# Copyright 2017, Artem Sidorenko
+# Copyright:: 2017, Artem Sidorenko
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,10 +22,10 @@
 package node['os-hardening']['packages']['auditd']
 
 service 'auditd' do
-  supports %i[start stop restart reload status]
-  if (node['platform_family'] == 'rhel' && node['platform_version'].to_f >= 7) ||
-     (node['platform_family'] == 'fedora' && node['platform_version'].to_f >= 27) ||
-     (node['platform_family'] == 'amazon' && node['platform_version'].to_f >= 2)
+  supports %i(start stop restart reload status)
+  if (platform_family?('rhel') && node['platform_version'].to_f >= 7) ||
+     (platform_family?('fedora') && node['platform_version'].to_f >= 27) ||
+     (platform_family?('amazon') && node['platform_version'].to_f >= 2)
     restart_command 'service auditd restart'
   end
   action [:enable]

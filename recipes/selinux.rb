@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 #
-# Cookbook Name: os-hardening
+# Cookbook:: Name: os-hardening
 # Recipe: selinux.rv
 #
-# Copyright 2017, Deutsche Telekom AG
+# Copyright:: 2017, Deutsche Telekom AG
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,7 @@
 
 # SELinux enforcing support
 
-case node['platform_family']
-when 'rhel', 'fedora', 'amazon'
+if platform_family?('rhel', 'fedora', 'amazon')
   unless node['os-hardening']['security']['selinux_mode'] == 'unmanaged'
     semode = case node['os-hardening']['security']['selinux_mode']
              when 'enforcing'

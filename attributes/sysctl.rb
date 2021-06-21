@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 #
-# Cookbook Name:: os-hardening
+# Cookbook:: os-hardening
 # Attributes:: sysctl
 #
-# Copyright 2014, Deutsche Telekom AG
+# Copyright:: 2014, Deutsche Telekom AG
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -92,10 +92,9 @@ default['sysctl']['params']['net']['ipv6']['conf']['all']['accept_ra'] = 0
 default['sysctl']['params']['net']['ipv6']['conf']['default']['accept_ra'] = 0
 
 # ExecShield protection against buffer overflows
-case node['platform_family']
-when 'rhel', 'fedora'
+if platform_family?('rhel', 'fedora')
   # on Oracle Linux with UEK it is not available; this helps address UEK on Oracle Linux 6
-  is_oracle_uek = (node['platform'] == 'oracle' && node['kernel']['release'] =~ /^4\..*uek/)
+  is_oracle_uek = (platform?('oracle') && node['kernel']['release'] =~ /^4\..*uek/)
 
   # on RHEL 7 its enabled per default and can't be disabled
   if node['platform_version'].to_f < 7 && !is_oracle_uek

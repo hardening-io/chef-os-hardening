@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 #
-# Copyright 2014, Deutsche Telekom AG
+# Copyright:: 2014, Deutsche Telekom AG
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -372,29 +372,29 @@ describe 'os-hardening::sysctl' do
 
     describe 'when unused filesystems are disabled with default values' do
       it 'should render the proper modprobe file' do
-        %w[cramfs freevxfs jffs2 hfs hfsplus squashfs udf vfat].each do |fs|
-          expect(chef_run).to render_file('/etc/modprobe.d/dev-sec.conf').
-            with_content("install #{fs} /bin/true")
+        %w(cramfs freevxfs jffs2 hfs hfsplus squashfs udf vfat).each do |fs|
+          expect(chef_run).to render_file('/etc/modprobe.d/dev-sec.conf')
+            .with_content("install #{fs} /bin/true")
         end
       end
     end
 
     describe 'when only some filesystems are disabled' do
-      let(:disable_filesystems) { %w[vfat udf] }
+      let(:disable_filesystems) { %w(vfat udf) }
 
       it 'should render the proper modprobe file' do
-        %w[udf vfat].each do |fs|
-          expect(chef_run).to render_file('/etc/modprobe.d/dev-sec.conf').
-            with_content("install #{fs} /bin/true")
+        %w(udf vfat).each do |fs|
+          expect(chef_run).to render_file('/etc/modprobe.d/dev-sec.conf')
+            .with_content("install #{fs} /bin/true")
         end
 
-        expect(chef_run).not_to render_file('/etc/modprobe.d/dev-sec.conf').
-          with_content('install cramfs /bin/true')
+        expect(chef_run).not_to render_file('/etc/modprobe.d/dev-sec.conf')
+          .with_content('install cramfs /bin/true')
       end
     end
 
     describe 'when unused filesystems are not disabled' do
-      let(:disable_filesystems) { %w[] }
+      let(:disable_filesystems) { %w() }
 
       it 'should delete the modprobe file' do
         expect(chef_run).to delete_file('/etc/modprobe.d/dev-sec.conf')
